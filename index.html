@@ -35,6 +35,8 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
             animation: fadeIn 0.8s ease-in;
+            position: relative; /* FIXED: Added for scanline positioning */
+            overflow: hidden; /* FIXED: Added to contain scanline animation */
         }
 
         @keyframes fadeIn {
@@ -147,44 +149,6 @@
             color: rgba(255, 255, 255, 0.9);
         }
 
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
-            color: white;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: clamp(14px, 2.5vw, 18px);
-            margin-top: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(76, 175, 80, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(76, 175, 80, 0.4);
-        }
-
-        .footer {
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .logo {
-            font-size: clamp(18px, 3vw, 24px);
-            font-weight: 700;
-            color: #4caf50;
-            margin-bottom: 10px;
-        }
-
-        .tagline {
-            font-size: clamp(12px, 2vw, 14px);
-            color: rgba(255, 255, 255, 0.6);
-            font-style: italic;
-        }
-
         .demo-badge {
             display: inline-block;
             background: rgba(255, 215, 61, 0.2);
@@ -226,6 +190,7 @@
             height: 2px;
             background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.5), transparent);
             animation: scan 3s linear infinite;
+            z-index: 1; /* FIXED: Ensure scanline appears above background but below content */
         }
 
         @keyframes scan {
@@ -235,6 +200,12 @@
             100% {
                 transform: translateY(600px);
             }
+        }
+
+        /* FIXED: Ensure content appears above scanline */
+        .container > * {
+            position: relative;
+            z-index: 2;
         }
     </style>
 </head>
